@@ -1,46 +1,263 @@
 # Women's Hypothyroidism Screening System
 
-A full-stack AI-powered web application for early screening of hypothyroidism in women using Machine Learning and Large Language Models. The system predicts thyroid status from clinical features or thyroid laboratory reports and provides AI-generated explanations with dietary recommendations.
+An AI-powered web application for early hypothyroidism screening in women. The system combines a machine learning classifier with automated thyroid report parsing and LLM-generated clinical explanations to provide an end-to-end screening experience.
+
+> **Disclaimer:** This application is intended for educational and research purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.
 
 ---
 
-## Overview
+## Live Demo
 
-Hypothyroidism is one of the most common endocrine disorders affecting women. Early identification can help prevent long-term complications and improve quality of life.
-
-This project combines:
-
-- Machine Learning for thyroid status prediction
-- PDF report parsing for automated laboratory value extraction
-- Large Language Models for personalized explanations
-- Modern full-stack web technologies for an interactive user experience
+- **Frontend:** https://hypothyroid-screening.vercel.app/
+- **Backend API:** https://hypothyroid-screening.onrender.com
+- **API Documentation (Swagger):** https://hypothyroid-screening.onrender.com/docs
 
 ---
 
 ## Features
 
-### Machine Learning Prediction
-- Random Forest classifier trained on a women-centric thyroid dataset
-- Predicts:
-  - Negative
-  - Compensated Hypothyroidism
-  - Primary Hypothyroidism
-- Confidence score and class probabilities
+- Early screening for hypothyroidism using a trained Random Forest classifier
+- Upload thyroid laboratory reports (PDF)
+- Automatic extraction of thyroid biomarkers using OCR and regex-based parsing
+- Manual entry of laboratory values and clinical history
+- AI-generated explanation of prediction using Groq LLM
+- RESTful FastAPI backend
+- Responsive React + Vite frontend
+- Interactive API documentation with Swagger UI
 
-### Laboratory Report Parsing
-- Upload thyroid blood test reports (PDF)
-- Automatically extracts:
-  - TSH
-  - T3
-  - TT4
-  - T4U
-  - FTI
+---
 
-### AI Health Insights
-- Plain-language explanation of prediction
-- Lifestyle guidance
-- Foods to include
-- Foods to avoid
+## Tech Stack
+
+
+### Frontend - 
+React, Vite, JavaScript, CSS
+
+### Backend - FastAPI, Python, Uvicorn
+
+### Machine Learning - Scikit-learn, Random Forest Classifier, Pandas, NumPy
+
+### AI - Groq API, Llama 3.3 70B Versatile
+
+### Report Processing
+- pdfplumber
+- OCR
+
+---
+
+## Project Structure
+
+```
+hypothyroid-screening/
+│
+├── backend/
+│   ├── models/
+│   ├── main.py
+│   ├── predictor.py
+│   ├── report_parser.py
+│   ├── llm.py
+│   ├── schemas.py
+│   └── requirements.txt
+│
+└── frontend/
+    ├── src/
+    ├── package.json
+    ├── vite.config.js
+    └── index.html
+```
+
+---
+
+## Workflow
+
+```
+User
+   │
+   ▼
+Upload PDF / Manual Input
+   │
+   ▼
+Report Parsing
+   │
+   ▼
+Feature Extraction
+   │
+   ▼
+Random Forest Prediction
+   │
+   ▼
+Groq LLM Explanation
+   │
+   ▼
+Prediction Result
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/health` | Health check |
+| POST | `/predict` | Predict hypothyroidism |
+| POST | `/parse-report` | Parse uploaded thyroid report |
+
+Complete API documentation is available at:
+
+https://hypothyroid-screening.onrender.com/docs
+
+---
+
+## Local Setup
+
+### Clone Repository
+
+```bash
+git clone https://github.com/akshita2736/hypothyroid-screening.git
+cd hypothyroid-screening
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd backend
+
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux/macOS
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+```
+
+Backend runs on:
+
+```
+http://localhost:8000
+```
+
+Swagger Docs:
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
+## Environment Variables
+
+### Backend
+
+Create a `.env` file inside the `backend` folder.
+
+```env
+GROQ_API_KEY=YOUR_GROQ_API_KEY
+GROQ_MODEL=llama-3.3-70b-versatile
+```
+
+### Frontend
+
+Create a `.env` file inside the `frontend` folder.
+
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+For production:
+
+```env
+VITE_API_URL=https://hypothyroid-screening.onrender.com
+```
+
+---
+
+## Model Information
+
+- Algorithm: Random Forest Classifier
+- Task: Multi-class thyroid classification
+- Target: Hypothyroidism screening
+- Input:
+  - Thyroid laboratory values
+  - Clinical history features
+- Output:
+  - Predicted thyroid status
+  - Confidence score
+  - AI-generated explanation
+
+---
+
+## Deployment
+
+### Frontend
+
+Hosted on Vercel
+
+https://hypothyroid-screening.vercel.app/
+
+### Backend
+
+Hosted on Render
+
+https://hypothyroid-screening.onrender.com
+
+---
+
+## Future Improvements
+
+- Improved OCR for diverse laboratory report formats
+- Additional thyroid biomarkers support
+- Explainable AI visualizations
+- User authentication
+- Patient history tracking
+- Doctor dashboard
+- Cloud database integration
+- Multilingual support
+
+---
+
+## Author
+
+**Akshita Sharma**
+
+- GitHub: https://github.com/akshita2736
+- LinkedIn: https://www.linkedin.com/in/akshita-sharma/
+
+---
+
+## Citation
+
+If you use this project for research or educational purposes, please cite the associated work appropriately.
+
+---
+
+## License
+
+This project is released under the MIT License.
 - Medical disclaimer
 
 ### Modern Web Application
